@@ -1,16 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_MYSQL",
-      "label": "MySQL",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "mysql",
-      "pluginName": "MySQL"
-    },
-    {
-      "name": "DS_LTDB",
-      "label": "ltdb",
+      "name": "DS_MYSQL-LTDB",
+      "label": "MySQL-LTDB",
       "description": "",
       "type": "datasource",
       "pluginId": "mysql",
@@ -26,12 +18,6 @@
     },
     {
       "type": "panel",
-      "id": "bargauge",
-      "name": "Bar gauge",
-      "version": ""
-    },
-    {
-      "type": "panel",
       "id": "dashlist",
       "name": "Dashboard list",
       "version": ""
@@ -40,7 +26,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.1.1"
+      "version": "7.1.3"
     },
     {
       "type": "panel",
@@ -93,7 +79,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -102,7 +88,7 @@
       },
       "folderId": null,
       "gridPos": {
-        "h": 6,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 0
@@ -115,7 +101,9 @@
       "recent": false,
       "search": false,
       "starred": true,
-      "tags": [],
+      "tags": [
+        "ltdb"
+      ],
       "targets": [
         {
           "format": "time_series",
@@ -150,7 +138,7 @@
       "type": "dashlist"
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -161,7 +149,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 9
       },
       "id": 31,
       "options": {
@@ -207,19 +195,19 @@
     {
       "dashboardFilter": "",
       "dashboardTags": [],
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
         },
         "overrides": []
       },
-      "folderId": null,
+      "folderId": 29,
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 10
       },
       "id": 27,
       "limit": 10,
@@ -229,10 +217,7 @@
       "show": "current",
       "sortOrder": 1,
       "stateFilter": [
-        "alerting",
-        "execution_error",
-        "paused",
-        "ok"
+        "alerting"
       ],
       "targets": [
         {
@@ -270,7 +255,7 @@
       "type": "alertlist"
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -281,7 +266,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 14
       },
       "id": 40,
       "options": {
@@ -325,7 +310,7 @@
       "type": "logs"
     },
     {
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -365,14 +350,14 @@
         "h": 6,
         "w": 9,
         "x": 0,
-        "y": 13
+        "y": 15
       },
       "id": 7,
       "options": {
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "format": "table",
@@ -407,7 +392,7 @@
       "type": "table"
     },
     {
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -459,14 +444,14 @@
         "h": 6,
         "w": 15,
         "x": 9,
-        "y": 13
+        "y": 15
       },
       "id": 39,
       "options": {
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "targets": [
         {
           "format": "table",
@@ -503,7 +488,7 @@
       "type": "table"
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -514,7 +499,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 21
       },
       "id": 33,
       "options": {
@@ -564,7 +549,7 @@
           {
             "evaluator": {
               "params": [
-                300000000
+                524288000
               ],
               "type": "gt"
             },
@@ -597,7 +582,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -610,7 +595,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 20
+        "y": 22
       },
       "hiddenSeries": false,
       "id": 9,
@@ -627,7 +612,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -667,13 +652,11 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:3037",
           "colorMode": "critical",
           "fill": true,
           "line": true,
           "op": "gt",
-          "value": 400331937,
-          "yaxis": "left"
+          "value": 524288000
         }
       ],
       "timeFrom": null,
@@ -719,7 +702,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -744,30 +739,24 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 20
+        "y": 22
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 20,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "node",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM used_memory\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY value desc",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM used_memory\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n",
           "refId": "A",
           "select": [
             [
@@ -794,10 +783,31 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 Used memories of all redis-servers",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -808,7 +818,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 31
       },
       "id": 34,
       "options": {
@@ -891,7 +901,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -904,7 +914,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 30
+        "y": 32
       },
       "hiddenSeries": false,
       "id": 11,
@@ -921,7 +931,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -961,13 +971,11 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:2939",
           "colorMode": "critical",
           "fill": true,
           "line": true,
           "op": "lt",
-          "value": 10,
-          "yaxis": "left"
+          "value": 10
         }
       ],
       "timeFrom": null,
@@ -1013,7 +1021,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1038,30 +1058,24 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 30
+        "y": 32
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 21,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM datakeys\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY event_time",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM datakeys\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n",
           "refId": "A",
           "select": [
             [
@@ -1088,10 +1102,31 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 In-memory data keys of all redis-servers",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1102,7 +1137,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 41
       },
       "id": 35,
       "options": {
@@ -1152,7 +1187,7 @@
           {
             "evaluator": {
               "params": [
-                10000000
+                1000000000
               ],
               "type": "gt"
             },
@@ -1185,7 +1220,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1198,7 +1233,7 @@
         "h": 10,
         "w": 17,
         "x": 0,
-        "y": 40
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 13,
@@ -1215,7 +1250,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1255,13 +1290,11 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:2645",
           "colorMode": "critical",
           "fill": true,
           "line": true,
           "op": "gt",
-          "value": 10000000,
-          "yaxis": "left"
+          "value": 1000000000
         }
       ],
       "timeFrom": null,
@@ -1307,7 +1340,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1332,30 +1377,24 @@
         "h": 10,
         "w": 7,
         "x": 17,
-        "y": 40
+        "y": 42
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 23,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM partitions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY value desc\n",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM partitions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n\n",
           "refId": "A",
           "select": [
             [
@@ -1382,10 +1421,31 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 Partitions of all redis-servers",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1396,7 +1456,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 52
       },
       "id": 36,
       "options": {
@@ -1480,7 +1540,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1493,7 +1553,7 @@
         "h": 10,
         "w": 17,
         "x": 0,
-        "y": 51
+        "y": 53
       },
       "hiddenSeries": false,
       "id": 15,
@@ -1510,7 +1570,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1550,13 +1610,18 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:2743",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1
+        },
+        {
           "colorMode": "critical",
           "fill": true,
           "line": true,
           "op": "lt",
-          "value": 10,
-          "yaxis": "left"
+          "value": 10
         }
       ],
       "timeFrom": null,
@@ -1614,7 +1679,7 @@
         "mode": "spectrum"
       },
       "dataFormat": "timeseries",
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1639,7 +1704,7 @@
         "h": 10,
         "w": 7,
         "x": 17,
-        "y": 51
+        "y": 53
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1707,7 +1772,7 @@
       "yBucketSize": null
     },
     {
-      "datasource": "${DS_MYSQL}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1718,7 +1783,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 61
+        "y": 63
       },
       "id": 37,
       "options": {
@@ -1768,7 +1833,7 @@
           {
             "evaluator": {
               "params": [
-                1000000000
+                100000000000
               ],
               "type": "gt"
             },
@@ -1801,7 +1866,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1814,7 +1879,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 62
+        "y": 64
       },
       "hiddenSeries": false,
       "id": 17,
@@ -1831,7 +1896,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1871,13 +1936,11 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:2841",
           "colorMode": "critical",
           "fill": true,
           "line": true,
           "op": "gt",
-          "value": 1000000000,
-          "yaxis": "left"
+          "value": 100000000000
         }
       ],
       "timeFrom": null,
@@ -1923,7 +1986,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1948,30 +2023,24 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 62
+        "y": 64
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 25,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM storages\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY value desc\n",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM storages\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n\n",
           "refId": "A",
           "select": [
             [
@@ -1998,13 +2067,36 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 Storages of all redis-servers(MB)",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     }
   ],
-  "refresh": "1m",
+  "refresh": "10m",
   "schemaVersion": 26,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "ltdb"
+  ],
   "templating": {
     "list": []
   },
@@ -2018,7 +2110,7 @@
       "30s",
       "1m",
       "5m",
-      "15m",
+      "10m",
       "30m",
       "1h",
       "2h",
@@ -2028,5 +2120,5 @@
   "timezone": "",
   "title": "Cluster 1",
   "uid": "6WQBnr4Gz",
-  "version": 120
+  "version": 13
 }

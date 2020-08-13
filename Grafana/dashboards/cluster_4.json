@@ -23,12 +23,6 @@
       "version": ""
     },
     {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -57,6 +51,12 @@
       "id": "mysql",
       "name": "MySQL",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
     }
   ],
   "annotations": {
@@ -189,7 +189,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "---------------------------------------------------------------------------------------",
+      "title": "--------------------------------------------------------------------------------------------",
       "type": "logs"
     },
     {
@@ -204,7 +204,7 @@
       },
       "folderId": 29,
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 24,
         "x": 0,
         "y": 10
@@ -266,9 +266,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 14
       },
-      "id": 32,
+      "id": 40,
       "options": {
         "showLabels": false,
         "showTime": false,
@@ -306,173 +306,16 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "---------------------------------------------------------------------------------------",
+      "title": "--------------------------------------------------------------------------------------------",
       "type": "logs"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                95
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Server CPU alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 14
-      },
-      "hiddenSeries": false,
-      "id": 36,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pluginVersion": "7.1.3",
-      "pointradius": 2,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  event_time AS \"time\",\n  node AS metric,\n  Used\nFROM server_cpu\nWHERE\n  $__timeFilter(event_time)\nORDER BY event_time",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "Used"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "server_cpu",
-          "timeColumn": "event_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 95
-        }
-      ],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Server CPU",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:148",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:149",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "datasource": "${DS_MYSQL-LTDB}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -488,91 +331,40 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Server"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": null
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 14
+        "h": 6,
+        "w": 9,
+        "x": 0,
+        "y": 15
       },
-      "id": 37,
+      "id": 7,
       "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true
+        "showHeader": true,
+        "sortBy": []
       },
       "pluginVersion": "7.1.3",
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  event_time AS \"time\",\n  node AS metric,\n  Used\nFROM server_cpu\nWHERE\n  $__timeFilter(event_time)\nORDER BY event_time",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "Used"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "server_cpu",
-          "timeColumn": "event_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Top 10 Server CPU",
-      "type": "gauge"
-    },
-    {
-      "datasource": "${DS_MYSQL-LTDB}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 22
-      },
-      "id": 34,
-      "options": {
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "pluginVersion": "7.1.1",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": false,
-          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
+          "rawSql": "SELECT\n  node AS \"Server\",\n  masters,\n  slaves\nFROM distribution\nwhere cluster = 4\nORDER BY cluster, Server\n\n",
           "refId": "A",
           "select": [
             [
@@ -596,190 +388,16 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "---------------------------------------------------------------------------------------",
-      "type": "logs"
-    },
-    {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                503316480
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Server memory alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_MYSQL-LTDB}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 23
-      },
-      "hiddenSeries": false,
-      "id": 2,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pluginVersion": "7.1.3",
-      "pointradius": 2,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "node",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  Total,\n  Used\nFROM server_memory\nWHERE\n  $__timeFilter(event_time)\nORDER BY event_time",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "Total"
-                ],
-                "type": "column"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "Used"
-                ],
-                "type": "column"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "Available"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "server_memory",
-          "timeColumn": "event_time",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 503316480
-        }
-      ],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Server memory",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Node distribution",
+      "type": "table"
     },
     {
       "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -795,64 +413,64 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Feature"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 254
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 23
+        "h": 6,
+        "w": 15,
+        "x": 9,
+        "y": 15
       },
-      "id": 18,
+      "id": 39,
       "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true
+        "showHeader": true,
+        "sortBy": []
       },
       "pluginVersion": "7.1.3",
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
-          "metricColumn": "node",
+          "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  Used/1024/1024 as \"Used(MB)\"\nFROM server_memory\nWHERE\n  $__timeFilter(event_time)\n\n",
+          "rawSql": "SELECT\n  feature as \"Feature\",\n  value as \"Value\",\n  description as \"Description\"\nFROM ltdb.configs\nWHERE cluster = 4\nORDER BY event_time desc\nlimit 4\n\n",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "Total"
-                ],
-                "type": "column"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "Used"
-                ],
-                "type": "column"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "Available"
+                  "value"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "table": "server_memory",
+          "table": "configs",
           "timeColumn": "event_time",
           "timeColumnType": "timestamp",
           "where": [
@@ -866,9 +484,8 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Top 10 Used Server memory(MB)",
-      "transformations": [],
-      "type": "gauge"
+      "title": "Configures",
+      "type": "table"
     },
     {
       "datasource": "${DS_MYSQL-LTDB}",
@@ -882,7 +499,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 21
       },
       "id": 33,
       "options": {
@@ -922,45 +539,10 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "---------------------------------------------------------------------------------------",
+      "title": "--------------------------------------------------------------------------------------------",
       "type": "logs"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                2560000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Server disk(Used) alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -976,18 +558,17 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 9,
-        "w": 16,
+        "w": 17,
         "x": 0,
-        "y": 32
+        "y": 22
       },
       "hiddenSeries": false,
-      "id": 4,
+      "id": 9,
       "legend": {
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "rightSide": false,
         "show": true,
         "total": false,
         "values": false
@@ -1008,23 +589,23 @@
         {
           "format": "time_series",
           "group": [],
-          "metricColumn": "none",
+          "metricColumn": "node",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  concat(node , disk) AS metric,\n  Used\nFROM server_disk\nWHERE\n  $__timeFilter(event_time)\nORDER BY event_time",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM used_memory\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY event_time",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "Available"
+                  "value"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "table": "server_disk",
-          "timeColumn": "Available",
-          "timeColumnType": "float",
+          "table": "used_memory",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
           "where": [
             {
               "name": "$__timeFilter",
@@ -1034,19 +615,11 @@
           ]
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 2560000
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Server disk(Used)",
+      "title": "Used memories",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1062,6 +635,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:3009",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1070,6 +644,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:3010",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1119,40 +694,40 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 8,
-        "x": 16,
-        "y": 32
+        "w": 7,
+        "x": 17,
+        "y": 22
       },
       "heatmap": {},
       "hideZeroBuckets": false,
       "highlightCards": true,
-      "id": 19,
+      "id": 20,
       "legend": {
         "show": false
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
-          "metricColumn": "none",
+          "metricColumn": "node",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  concat(node , disk) AS metric,\n  Used/1024/1024/1024\nFROM server_disk\nWHERE\n  $__timeFilter(event_time)\nORDER BY Used desc\n\n",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM used_memory\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\n",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "Available"
+                  "value"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "table": "server_disk",
-          "timeColumn": "Available",
-          "timeColumnType": "float",
+          "table": "used_memory",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
           "where": [
             {
               "name": "$__timeFilter",
@@ -1164,7 +739,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Top 10 Used disk(GB)",
+      "title": "Top 10 Used memories of all redis-servers",
       "tooltip": {
         "show": true,
         "showHistogram": false
@@ -1189,41 +764,61 @@
       "yBucketSize": null
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                90
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Server disk(used percent) alert",
-        "noDataState": "no_data",
-        "notifications": []
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
       },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 34,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "--------------------------------------------------------------------------------------------",
+      "type": "logs"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1238,19 +833,18 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 16,
+        "h": 9,
+        "w": 17,
         "x": 0,
-        "y": 41
+        "y": 32
       },
       "hiddenSeries": false,
-      "id": 5,
+      "id": 11,
       "legend": {
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "rightSide": false,
         "show": true,
         "total": false,
         "values": false
@@ -1273,21 +867,21 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  concat(node , disk) AS metric,\n  used_percent\nFROM server_disk\nWHERE\n  $__timeFilter(event_time)\nORDER BY event_time",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM datakeys\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY event_time",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "Available"
+                  "value"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "table": "server_disk",
-          "timeColumn": "Available",
-          "timeColumnType": "float",
+          "table": "datakeys",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
           "where": [
             {
               "name": "$__timeFilter",
@@ -1297,19 +891,11 @@
           ]
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 90
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Server disk(used percent)",
+      "title": "In-memory data keys ",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1325,6 +911,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2911",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1333,6 +920,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2912",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1381,19 +969,19 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 41
+        "h": 9,
+        "w": 7,
+        "x": 17,
+        "y": 32
       },
       "heatmap": {},
       "hideZeroBuckets": false,
       "highlightCards": true,
-      "id": 22,
+      "id": 21,
       "legend": {
         "show": false
       },
-      "pluginVersion": "7.1.1",
+      "pluginVersion": "7.1.3",
       "reverseYBuckets": false,
       "targets": [
         {
@@ -1401,21 +989,21 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  concat(node , disk) AS metric,\n  used_percent\nFROM server_disk\nWHERE\n  $__timeFilter(event_time)\nORDER BY used_percent desc",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM datakeys\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\n",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "Available"
+                  "value"
                 ],
                 "type": "column"
               }
             ]
           ],
-          "table": "server_disk",
-          "timeColumn": "Available",
-          "timeColumnType": "float",
+          "table": "datakeys",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
           "where": [
             {
               "name": "$__timeFilter",
@@ -1427,7 +1015,835 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Top 10 Server disk(used percent)",
+      "title": "Top 10 In-memory data keys of all redis-servers",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 35,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "--------------------------------------------------------------------------------------------",
+      "type": "logs"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 17,
+        "x": 0,
+        "y": 42
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.3",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM partitions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY event_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "partitions",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Partitions ",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2617",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2618",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 7,
+        "x": 17,
+        "y": 42
+      },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
+      "id": 23,
+      "legend": {
+        "show": false
+      },
+      "pluginVersion": "7.1.3",
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM partitions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY value desc\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "partitions",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Top 10 Partitions of all redis-servers",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 52
+      },
+      "id": 36,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "--------------------------------------------------------------------------------------------",
+      "type": "logs"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 17,
+        "x": 0,
+        "y": 53
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.3",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM evictions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY event_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "evictions",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Evictions ",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2715",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2716",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 7,
+        "x": 17,
+        "y": 53
+      },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
+      "id": 24,
+      "legend": {
+        "show": false
+      },
+      "pluginVersion": "7.1.1",
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM evictions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY value desc",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "evictions",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Top 10 Evictions of all redis-servers",
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    },
+    {
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 37,
+      "options": {
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "--------------------------------------------------------------------------------------------",
+      "type": "logs"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 17,
+        "x": 0,
+        "y": 64
+      },
+      "hiddenSeries": false,
+      "id": 17,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.3",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM storages\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\nORDER BY event_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "storages",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Storages ",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2813",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2814",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_MYSQL-LTDB}",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 17,
+        "y": 64
+      },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
+      "id": 25,
+      "legend": {
+        "show": false
+      },
+      "pluginVersion": "7.1.3",
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM storages\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 4\n\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "storages",
+          "timeColumn": "event_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Top 10 Storages of all redis-servers(MB)",
       "tooltip": {
         "show": true,
         "showHistogram": false
@@ -1479,7 +1895,7 @@
     ]
   },
   "timezone": "",
-  "title": "Server Status",
-  "uid": "R-xoVzSMk",
-  "version": 14
+  "title": "Cluster 4",
+  "uid": "ZiJzLaSMk",
+  "version": 11
 }
