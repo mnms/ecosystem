@@ -9,8 +9,8 @@
       "pluginName": "MySQL"
     },
     {
-      "name": "DS_LTDB",
-      "label": "ltdb",
+      "name": "DS_LTDB2",
+      "label": "ltdb2",
       "description": "",
       "type": "datasource",
       "pluginId": "mysql",
@@ -22,12 +22,6 @@
       "type": "panel",
       "id": "alertlist",
       "name": "Alert list",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "bargauge",
-      "name": "Bar gauge",
       "version": ""
     },
     {
@@ -102,8 +96,8 @@
       },
       "folderId": null,
       "gridPos": {
-        "h": 6,
-        "w": 24,
+        "h": 7,
+        "w": 11,
         "x": 0,
         "y": 0
       },
@@ -150,64 +144,9 @@
       "type": "dashlist"
     },
     {
-      "datasource": "${DS_MYSQL}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 6
-      },
-      "id": 31,
-      "options": {
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "pluginVersion": "7.1.1",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": false,
-          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "--------------------------------------------------------------------------------------------",
-      "type": "logs"
-    },
-    {
       "dashboardFilter": "",
       "dashboardTags": [],
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -216,10 +155,10 @@
       },
       "folderId": null,
       "gridPos": {
-        "h": 5,
-        "w": 24,
-        "x": 0,
-        "y": 7
+        "h": 7,
+        "w": 13,
+        "x": 11,
+        "y": 0
       },
       "id": 27,
       "limit": 10,
@@ -231,8 +170,7 @@
       "stateFilter": [
         "alerting",
         "execution_error",
-        "paused",
-        "ok"
+        "no_data"
       ],
       "targets": [
         {
@@ -281,7 +219,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 7
       },
       "id": 40,
       "options": {
@@ -325,7 +263,7 @@
       "type": "logs"
     },
     {
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -365,7 +303,7 @@
         "h": 6,
         "w": 9,
         "x": 0,
-        "y": 13
+        "y": 8
       },
       "id": 7,
       "options": {
@@ -407,7 +345,7 @@
       "type": "table"
     },
     {
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -459,7 +397,7 @@
         "h": 6,
         "w": 15,
         "x": 9,
-        "y": 13
+        "y": 8
       },
       "id": 39,
       "options": {
@@ -473,7 +411,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  feature as \"Feature\",\n  value as \"Value\",\n  description as \"Description\"\nFROM ltdb.configs\nWHERE cluster = 1\nORDER BY event_time desc\nlimit 4\n\n",
+          "rawSql": "SELECT\n  feature as \"Feature\",\n  value as \"Value\",\n  description as \"Description\"\nFROM ltdb2.configs\nWHERE cluster = 1\nORDER BY event_time desc\nlimit 4\n\n",
           "refId": "A",
           "select": [
             [
@@ -514,7 +452,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 14
       },
       "id": 33,
       "options": {
@@ -558,46 +496,11 @@
       "type": "logs"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                300000000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Panel Title alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -610,7 +513,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 20
+        "y": 15
       },
       "hiddenSeries": false,
       "id": 9,
@@ -665,17 +568,7 @@
           ]
         }
       ],
-      "thresholds": [
-        {
-          "$$hashKey": "object:3037",
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 400331937,
-          "yaxis": "left"
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -719,7 +612,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -744,30 +649,24 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 20
+        "y": 15
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 20,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
       "pluginVersion": "7.1.1",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "node",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM used_memory\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY value desc",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM used_memory\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1",
           "refId": "A",
           "select": [
             [
@@ -794,7 +693,28 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 Used memories of all redis-servers",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
       "datasource": "${DS_MYSQL}",
@@ -808,7 +728,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 24
       },
       "id": 34,
       "options": {
@@ -880,8 +800,8 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
+        "for": "20m",
+        "frequency": "20m",
         "handler": 1,
         "name": "In-memory data keys of all redis-servers alert",
         "noDataState": "no_data",
@@ -891,7 +811,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -904,7 +824,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 30
+        "y": 25
       },
       "hiddenSeries": false,
       "id": 11,
@@ -961,7 +881,7 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:2939",
+          "$$hashKey": "object:3166",
           "colorMode": "critical",
           "fill": true,
           "line": true,
@@ -1013,7 +933,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1038,30 +970,24 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 30
+        "y": 25
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 21,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
       "pluginVersion": "7.1.1",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM datakeys\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY event_time",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM datakeys\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n",
           "refId": "A",
           "select": [
             [
@@ -1088,7 +1014,28 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 In-memory data keys of all redis-servers",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
       "datasource": "${DS_MYSQL}",
@@ -1102,7 +1049,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 34
       },
       "id": 35,
       "options": {
@@ -1146,46 +1093,11 @@
       "type": "logs"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                10000000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Panel Title alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1198,7 +1110,7 @@
         "h": 10,
         "w": 17,
         "x": 0,
-        "y": 40
+        "y": 35
       },
       "hiddenSeries": false,
       "id": 13,
@@ -1253,17 +1165,7 @@
           ]
         }
       ],
-      "thresholds": [
-        {
-          "$$hashKey": "object:2645",
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 10000000,
-          "yaxis": "left"
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -1307,7 +1209,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1332,30 +1246,24 @@
         "h": 10,
         "w": 7,
         "x": 17,
-        "y": 40
+        "y": 35
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 23,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
       "pluginVersion": "7.1.1",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM partitions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY value desc\n",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value\nFROM partitions\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n",
           "refId": "A",
           "select": [
             [
@@ -1382,7 +1290,28 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 Partitions of all redis-servers",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     },
     {
       "datasource": "${DS_MYSQL}",
@@ -1396,7 +1325,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 45
       },
       "id": 36,
       "options": {
@@ -1469,8 +1398,8 @@
           }
         ],
         "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
+        "for": "20m",
+        "frequency": "20m",
         "handler": 1,
         "name": "Evictions of all redis-servers alert",
         "noDataState": "no_data",
@@ -1480,7 +1409,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1493,7 +1422,7 @@
         "h": 10,
         "w": 17,
         "x": 0,
-        "y": 51
+        "y": 46
       },
       "hiddenSeries": false,
       "id": 15,
@@ -1550,7 +1479,16 @@
       ],
       "thresholds": [
         {
-          "$$hashKey": "object:2743",
+          "$$hashKey": "object:3417",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1,
+          "yaxis": "left"
+        },
+        {
+          "$$hashKey": "object:3418",
           "colorMode": "critical",
           "fill": true,
           "line": true,
@@ -1614,7 +1552,7 @@
         "mode": "spectrum"
       },
       "dataFormat": "timeseries",
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1639,7 +1577,7 @@
         "h": 10,
         "w": 7,
         "x": 17,
-        "y": 51
+        "y": 46
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1718,7 +1656,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 61
+        "y": 56
       },
       "id": 37,
       "options": {
@@ -1762,46 +1700,11 @@
       "type": "logs"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                1000000000
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "Storages of all redis-servers alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LTDB}",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -1814,7 +1717,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 62
+        "y": 57
       },
       "hiddenSeries": false,
       "id": 17,
@@ -1869,17 +1772,7 @@
           ]
         }
       ],
-      "thresholds": [
-        {
-          "$$hashKey": "object:2841",
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 1000000000,
-          "yaxis": "left"
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -1923,7 +1816,19 @@
       }
     },
     {
-      "datasource": "${DS_LTDB}",
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateOranges",
+        "exponent": 0.5,
+        "mode": "spectrum"
+      },
+      "dataFormat": "timeseries",
+      "datasource": "${DS_LTDB2}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -1948,30 +1853,24 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 62
+        "y": 57
       },
+      "heatmap": {},
+      "hideZeroBuckets": false,
+      "highlightCards": true,
       "id": 25,
-      "options": {
-        "displayMode": "basic",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "limit": 10,
-          "values": true
-        },
-        "showUnfilled": true
+      "legend": {
+        "show": false
       },
       "pluginVersion": "7.1.1",
+      "reverseYBuckets": false,
       "targets": [
         {
           "format": "time_series",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM storages\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\nORDER BY value desc\n",
+          "rawSql": "SELECT\n  unix_timestamp(event_time) AS \"time\",\n  node AS metric,\n  value/1024/1024\nFROM storages\nWHERE\n  $__timeFilter(event_time)\n  and cluster = 1\n",
           "refId": "A",
           "select": [
             [
@@ -1998,13 +1897,36 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Top 10 Storages of all redis-servers(MB)",
-      "type": "bargauge"
+      "tooltip": {
+        "show": true,
+        "showHistogram": false
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "short",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "auto",
+      "yBucketNumber": null,
+      "yBucketSize": null
     }
   ],
-  "refresh": "1m",
+  "refresh": "10m",
   "schemaVersion": 26,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "ltdb"
+  ],
   "templating": {
     "list": []
   },
@@ -2018,7 +1940,7 @@
       "30s",
       "1m",
       "5m",
-      "15m",
+      "10m",
       "30m",
       "1h",
       "2h",
@@ -2028,5 +1950,5 @@
   "timezone": "",
   "title": "Cluster 1",
   "uid": "6WQBnr4Gz",
-  "version": 120
+  "version": 128
 }
