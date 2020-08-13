@@ -89,7 +89,7 @@
       "folderId": null,
       "gridPos": {
         "h": 9,
-        "w": 24,
+        "w": 10,
         "x": 0,
         "y": 0
       },
@@ -138,63 +138,10 @@
       "type": "dashlist"
     },
     {
-      "datasource": "${DS_MYSQL-LTDB}",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 9
-      },
-      "id": 31,
-      "options": {
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "pluginVersion": "7.1.1",
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": false,
-          "rawSql": "SELECT\n  UNIX_TIMESTAMP(<time_column>) as time_sec,\n  <value column> as value,\n  <series name column> as metric\nFROM <table name>\nWHERE $__timeFilter(time_column)\nORDER BY <time_column> ASC\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "--------------------------------------------------------------------------------------------",
-      "type": "logs"
-    },
-    {
       "dashboardFilter": "",
-      "dashboardTags": [],
+      "dashboardTags": [
+        "ltdb"
+      ],
       "datasource": "${DS_MYSQL-LTDB}",
       "fieldConfig": {
         "defaults": {
@@ -204,10 +151,10 @@
       },
       "folderId": 29,
       "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 10
+        "h": 9,
+        "w": 14,
+        "x": 10,
+        "y": 0
       },
       "id": 27,
       "limit": 10,
@@ -266,7 +213,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 9
       },
       "id": 40,
       "options": {
@@ -350,7 +297,7 @@
         "h": 6,
         "w": 9,
         "x": 0,
-        "y": 15
+        "y": 10
       },
       "id": 7,
       "options": {
@@ -444,7 +391,7 @@
         "h": 6,
         "w": 15,
         "x": 9,
-        "y": 15
+        "y": 10
       },
       "id": 39,
       "options": {
@@ -499,7 +446,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 16
       },
       "id": 33,
       "options": {
@@ -560,7 +507,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 22
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 9,
@@ -696,7 +643,7 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 22
+        "y": 17
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -775,7 +722,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 26
       },
       "id": 34,
       "options": {
@@ -819,6 +766,41 @@
       "type": "logs"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                10
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "min"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "15m",
+        "frequency": "15m",
+        "handler": 1,
+        "name": "Alert cluster_4 in-memory data keys",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -836,7 +818,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 32
+        "y": 27
       },
       "hiddenSeries": false,
       "id": 11,
@@ -891,7 +873,15 @@
           ]
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 10
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -972,7 +962,7 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 32
+        "y": 27
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1051,7 +1041,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 36
       },
       "id": 35,
       "options": {
@@ -1112,7 +1102,7 @@
         "h": 10,
         "w": 17,
         "x": 0,
-        "y": 42
+        "y": 37
       },
       "hiddenSeries": false,
       "id": 13,
@@ -1248,7 +1238,7 @@
         "h": 10,
         "w": 7,
         "x": 17,
-        "y": 42
+        "y": 37
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1327,7 +1317,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 47
       },
       "id": 36,
       "options": {
@@ -1371,6 +1361,42 @@
       "type": "logs"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1,
+                10
+              ],
+              "type": "within_range"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "min"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "15m",
+        "frequency": "15m",
+        "handler": 1,
+        "name": "Alert cluster_4 evictions",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1388,7 +1414,7 @@
         "h": 10,
         "w": 17,
         "x": 0,
-        "y": 53
+        "y": 48
       },
       "hiddenSeries": false,
       "id": 15,
@@ -1443,7 +1469,22 @@
           ]
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1
+        },
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "lt",
+          "value": 10
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -1524,7 +1565,7 @@
         "h": 10,
         "w": 7,
         "x": 17,
-        "y": 53
+        "y": 48
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1603,7 +1644,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 58
       },
       "id": 37,
       "options": {
@@ -1664,7 +1705,7 @@
         "h": 9,
         "w": 17,
         "x": 0,
-        "y": 64
+        "y": 59
       },
       "hiddenSeries": false,
       "id": 17,
@@ -1800,7 +1841,7 @@
         "h": 9,
         "w": 7,
         "x": 17,
-        "y": 64
+        "y": 59
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1897,5 +1938,5 @@
   "timezone": "",
   "title": "Cluster 4",
   "uid": "ZiJzLaSMk",
-  "version": 11
+  "version": 14
 }
